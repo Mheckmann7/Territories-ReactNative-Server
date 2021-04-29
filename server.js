@@ -2,7 +2,11 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 
+require('dotenv').config();
+require('./config/database');
+
 const app = express();
+
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
@@ -18,6 +22,8 @@ app.get('/api/territory', function (req, res) {
 })
 
 //
+
+// app.use('/api/users', require('./routes/api/users')); 
 
 const port = process.env.PORT || 3001;
 
