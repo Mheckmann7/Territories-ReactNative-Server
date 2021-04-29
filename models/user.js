@@ -18,12 +18,16 @@ const userSchema = new Schema({
 
 //before a user document is saved to the database the password is hashed
 //hooks into the cycle, before it saves calls function(next)
-
 userSchema.pre('save', function (next) {
     const user = this;
-        //this keyword points to the document that is about to be saved 
+    //this keyword points to the document that is about to be saved 
     if (!user.isModified("password")) return next();
-        //dont hash the password if it hasnt been modified
-})
+    //dont hash the password if it hasn't been modified, i.e. they modify their email or userName
+    bcrypt.hash(user.password, SALT_ROUNDS, function (error, hash) {
+        if (error) return next(error) //hands off error object to mongoose
+        user.password = hash;
+        next(); 
+    });
+});
 
 module.exports = mongoose.model('User', userSchema);
