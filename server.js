@@ -23,7 +23,7 @@ app.get('/api/territory', function (req, res) {
 
 //
 
-// app.use('/api/users', require('./routes/api/users')); 
+app.use('/api/users', require('./routes/api/users')); 
 
 const port = process.env.PORT || 3001;
 

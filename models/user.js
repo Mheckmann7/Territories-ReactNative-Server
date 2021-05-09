@@ -8,11 +8,7 @@ const userSchema = new Schema({
         type: String,
         unique: true, 
     },
-    email: {
-        type: String,
-        unique: true,
-        lowercase: true,
-    },
+
     password: String, 
 }, { timestamps: true });
 
@@ -31,3 +27,9 @@ userSchema.pre('save', function (next) {
 });
 
 module.exports = mongoose.model('User', userSchema);
+
+// email: {
+//     type: String,
+//     unique: true,
+//     lowercase: true,
+// },
